@@ -1,6 +1,5 @@
 package br.com.movieapp.movie_popular_feature.presentation.components
 
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
