@@ -7,17 +7,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import br.com.movieapp.movie_popular_feature.presentation.MoviePopularScreen
 import br.com.movieapp.movie_popular_feature.presentation.MoviePopularViewModel
+import br.com.movieapp.search_movie_feature.presentation.MovieSearchScreen
+import br.com.movieapp.search_movie_feature.presentation.MovieSearchViewModel
 
 @Composable
 fun NavigationGraph(navController: NavHostController) {
     NavHost(
-        navController= navController,
+        navController = navController,
         startDestination = BottomNavItem.MoviePopular.route
     ) {
-
-
         composable(BottomNavItem.MoviePopular.route) {
-        val viewModel: MoviePopularViewModel = hiltViewModel()
+            val viewModel: MoviePopularViewModel = hiltViewModel()
             MoviePopularScreen(
                 uiState = viewModel.uiState,
                 navigateToDetail = { movieId ->
@@ -26,7 +26,20 @@ fun NavigationGraph(navController: NavHostController) {
             )
         }
         composable(BottomNavItem.MovieSearch.route) {
-//            MovieSearchScreen()
+            val viewModel: MovieSearchViewModel = hiltViewModel()
+            val uiState = viewModel.uiState
+            val onEvent = viewModel::event
+            val onFetch = viewModel::fetchMovies
+
+            MovieSearchScreen(
+                uiState = uiState,
+                onEvent = onEvent,
+                onFetch = onFetch,
+                navigateToDetail = { movieId ->
+                    //navController.navigate("movieDetailScreen/$movieId")
+                }
+            )
+
         }
         composable(BottomNavItem.MovieFavorite.route) {
 //            MovieFavoriteScreen()
